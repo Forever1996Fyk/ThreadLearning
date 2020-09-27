@@ -48,6 +48,7 @@ public class ThreadService {
             }
         };
 
+        // 一定先执行 executeThread.start() 才会调用run方法, 才会执行 runner.start();
         executeThread.start();
     }
 
