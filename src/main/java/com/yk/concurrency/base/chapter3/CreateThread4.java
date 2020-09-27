@@ -1,4 +1,4 @@
-package com.yk.concurrency.base.chaper3;
+package com.yk.concurrency.base.chapter3;
 
 /**
  * @program: ThreadLearning
