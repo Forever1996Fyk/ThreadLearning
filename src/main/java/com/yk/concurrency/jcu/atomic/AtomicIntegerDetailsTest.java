@@ -52,6 +52,19 @@ public class AtomicIntegerDetailsTest {
      * 在继续判断, 此时current=get()=2, next = 3, 再进行compareAndSet(current, next), 直到如果current与value相等, 将next赋给current, current=next， 最后返回current=3
      *
      * 所以compareAndSet(current, next)方法就是先判断current是否等于初始值value, 如果相等, 就像current与next交换,并返回true 如果不相等, 就直接返回false
+     *
+     * volatile修饰的变量, 能保证可见性, 有序性
+     * CAS(CompareAndSwap)算法也就是CPU级别的同步指令, 相当于乐观锁, 它可以检测到其他线程对共享数据的变化情况。
+     *
+     * 但是上面的情况, 会带来一个严重的问题。ABA问题!!!
+     *
+     * 什么是ABA问题? 简单来说, 在CompareAndSwap(CAS)过程中, 其他线程对value经过很多次修改, 只是最终值与原值相同。
+     *
+     * 如果线程A对value值从1->2的过程中, 会去判断当前值与value是否相等, 即current==value? 如果在这个过程中, 有线程B把value从1改为2, 然后又改为1。
+     * 对于线程A来说, 最终的值还是没有变化, 所以依旧会用这个值去处理。
+     *
+     * 解决办法也比较简单, 就是每次修改这个value值, 都给这个value加一个版本号, 最后判断这个版本号是不是最初, 如果不是就说明这个value被改过很多次, 那么CAS就失败
+     * 实例: AtomicStampedReference中就实现了。(原子引用加戳)
      */
     public static void getAndAdd() {
         AtomicInteger value = new AtomicInteger(1);
