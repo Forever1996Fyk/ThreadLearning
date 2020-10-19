@@ -9,11 +9,6 @@
     <packaging>jar</packaging>
 
     <dependencies>
-        <dependency>
-            <groupId>org.project.lombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.12</version>
-        </dependency>
         <!-- google guava -->
         <dependency>
             <groupId>com.google.guava</groupId>
@@ -31,5 +26,10 @@
             <version>4.12</version>
         </dependency>
     </dependencies>
+
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+      </properties>
 
 </project>
