@@ -53,6 +53,12 @@ public class ThreadPoolExecutorBuild {
      * BlockingQueue<Runnable> workQueue, 任务队列
      * ThreadFactory threadFactory, 创建线程工厂
      * RejectedExecutionHandler handler 拒绝策略处理
+     *
+     *
+     * 这里有一个问题, 就是workQueue任务队列。
+     *
+     * ThreadPoolExecutor中提供了一个getQueue()方法可以拿到这个workQueue任务队列, 那么我们可不可以拿到这个队列, 然后往这个队列插入任务, 让线程池去执行呢?
+     * 想知道答案, {@link ExecutorServiceExample5#testAddQueue()}
      */
     private static ExecutorService buildThreadPoolExecutor() {
         ExecutorService executorService = new ThreadPoolExecutor(1, 2, 30, TimeUnit.SECONDS,
