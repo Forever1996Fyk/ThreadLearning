@@ -61,12 +61,11 @@ public class BooleanLock implements Lock {
     @Override
     public synchronized void unlock() {
         if (Thread.currentThread() == currentThread) {
-
+            this.initValue = false;
+            Optional.of(Thread.currentThread() + " released the lock monitor.").ifPresent(System.out::println);
+            // 注意，只有notifyAll之后, 之后的线程才会进入可执行状态, 后面的线程才会继续执行
+            this.notifyAll();
         }
-        this.initValue = false;
-        Optional.of(Thread.currentThread() + " released the lock monitor.").ifPresent(System.out::println);
-        // 注意，只有notifyAll之后, 之后的线程才会进入可执行状态, 后面的线程才会继续执行
-        this.notifyAll();
     }
 
     @Override
