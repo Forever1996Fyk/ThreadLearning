@@ -12,11 +12,11 @@ import java.util.concurrent.TimeUnit;
  **/
 public class CyclicBarrierExample1 {
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, BrokenBarrierException {
 //        CyclicBarrier cyclicBarrier = new CyclicBarrier(2);
 
         // 这个runnable接口时当所有线程执行完成后, 进行回调
-        CyclicBarrier cyclicBarrier = new CyclicBarrier(2, new Runnable() {
+        CyclicBarrier cyclicBarrier = new CyclicBarrier(3, new Runnable() {
             @Override
             public void run() {
                 System.out.println("all of finished");
@@ -28,6 +28,7 @@ public class CyclicBarrierExample1 {
             public void run() {
                 try {
                     TimeUnit.SECONDS.sleep(15);
+                    int i = 1/0;
                     System.out.println("T1 finished.");
                     cyclicBarrier.await();
                     System.out.println("T1 the other thread finished to.");
@@ -55,11 +56,14 @@ public class CyclicBarrierExample1 {
             }
         }.start();
 
-        while (true) {
-            System.out.println(cyclicBarrier.getNumberWaiting());
-            System.out.println(cyclicBarrier.getParties());
-            System.out.println(cyclicBarrier.isBroken());
-            TimeUnit.SECONDS.sleep(2);
-        }
+//        while (true) {
+//            System.out.println(cyclicBarrier.getNumberWaiting());
+//            System.out.println(cyclicBarrier.getParties());
+//            System.out.println(cyclicBarrier.isBroken());
+//            TimeUnit.SECONDS.sleep(2);
+//        }
+
+        cyclicBarrier.await();
+        System.out.println("test");
     }
 }

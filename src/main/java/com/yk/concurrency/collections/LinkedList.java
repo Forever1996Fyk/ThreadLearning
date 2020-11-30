@@ -1,7 +1,5 @@
 package com.yk.concurrency.collections;
 
-import sun.text.bidi.BidiRun;
-
 /**
  * @program: ThreadLearning
  * @description: 自定义手写单向LinkedList
