@@ -1,4 +1,4 @@
-package com.yk.concurrency.collections;
+package com.yk.concurrency.collections.custom;
 
 import java.util.Random;
 
